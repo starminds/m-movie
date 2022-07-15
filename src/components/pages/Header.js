@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mainStyle } from "../styles/globalStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBed,
+  faBrain,
+  faHouse,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const SHeader = styled.div`
   width: 100%;
@@ -13,6 +19,7 @@ const SHeader = styled.div`
   background-color: #393e46;
   position: fixed;
   padding: ${mainStyle.padding};
+  z-index: 9;
 `;
 
 const Logo = styled.div`
@@ -33,7 +40,7 @@ const MainWrap = styled.div`
 const Menu = styled.div`
   margin-left: 30px;
   p {
-    width: 60px;
+    width: 70px;
     font-size: 15px;
     font-weight: 500;
     color: #eeeeee;
@@ -41,8 +48,21 @@ const Menu = styled.div`
 `;
 
 export const Header = () => {
+  const [bg, setBg] = useState("transparent");
+
+  const handleScroll = () => {
+    const sct = window.pageYOffset;
+    if (sct > 500) {
+      setBg("#1d1d1d");
+    } else {
+      setBg("transparent");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
   return (
-    <SHeader>
+    <SHeader bgcolor={bg}>
       <Logo>
         <Link to={"/"}>
           <p>M-movie</p>
@@ -59,23 +79,27 @@ export const Header = () => {
           </Link>
         </Menu>
         <Menu>
-          <Link to={"/Detail"}>
-            <p>Detail</p>
-          </Link>
-        </Menu>
-        <Menu>
           <Link to={"/Interest"}>
-            <p>Interest</p>
+            <p>
+              <FontAwesomeIcon icon={faBrain} />
+              Interest
+            </p>
           </Link>
         </Menu>
         <Menu>
           <Link to={"/Login"}>
-            <p>Login</p>
+            <p>
+              <FontAwesomeIcon icon={faBed} />
+              Login
+            </p>
           </Link>
         </Menu>
         <Menu>
           <Link to={"/Search"}>
-            <p>Search</p>
+            <p>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              Search
+            </p>
           </Link>
         </Menu>
       </MainWrap>
