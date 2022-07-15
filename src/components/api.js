@@ -14,7 +14,7 @@ export const movieApi = {
   upComming: () => api.get("movie/upcoming"),
   moviedetail: (movie_id) => api.get(`movie/${movie_id}`),
   // detailsimilar: (id) => api.get(`movie/${id}/similar`),
-  // video: (id) => api.get(`movie/${id}/videos`),
+  video: (id) => api.get(`movie/${id}/videos`),
   search: (term) =>
     api.get("search/movie", {
       params: {

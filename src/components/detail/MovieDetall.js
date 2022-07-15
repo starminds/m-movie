@@ -1,8 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { imgUrl } from "../component/content";
 import { mainStyle } from "../styles/globalStyle";
+import { movieApi } from "../api";
 
 const Wrap = styled.div`
   height: 95vh;
@@ -173,6 +175,14 @@ const ConLine = styled.div`
   opacity: 0.5;
   padding: ${mainStyle.padding};
 `;
+const IframeBox = styled.div``;
+
+const Iframe = styled.iframe`
+  width: 100%;
+  height: 800px;
+  margin-top: 150px;
+  border: 2px solid;
+`;
 
 // const Bg = styled.div`
 //   width: 100%;
@@ -186,6 +196,22 @@ const ConLine = styled.div`
 //   left: 0;
 // `;
 export const MovieDetall = ({ movieData }) => {
+  const [movieViedo, setmovieViedo] = useState();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const movieViedo = async () => {
+      try {
+        const {
+          data: { results },
+        } = await movieApi.video(id);
+        setmovieViedo(results.length === 0 ? null : results[0].key);
+      } catch (error) {}
+    };
+    movieViedo();
+  }, []);
+  console.log(movieViedo);
+
   return (
     <Wrap
       style={{
@@ -213,9 +239,7 @@ export const MovieDetall = ({ movieData }) => {
             </a>
           </StartBt>
           <PreviewBt>
-            <Link to={"/"}>
-              <text>Preview</text>
-            </Link>
+            <text>Preview</text>
           </PreviewBt>
           <Button>
             <Link to={"/InterestMovie"}>
@@ -230,6 +254,14 @@ export const MovieDetall = ({ movieData }) => {
           <text>추천작</text>
         </Consimilar>
         <ConLine></ConLine>
+        <IframeBox>
+          {movieViedo ? (
+            <Iframe
+              src={`https://www.youtube.com/embed/${movieViedo}`}
+              allowFullScreen
+            ></Iframe>
+          ) : null}
+        </IframeBox>
       </ConWrap>
     </Wrap>
   );

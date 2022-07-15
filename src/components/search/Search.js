@@ -6,24 +6,23 @@ import { movieApi } from "../api";
 import { imgUrl } from "../component/content";
 import { Container } from "../Container";
 import { Loading } from "../Loading";
-
-const Wrap = styled.div`
-  width: 100%;
-  height: 100vh;
-`;
+import { mainStyle } from "../styles/globalStyle";
 
 const SearchWrap = styled.div`
-  margin-top: 100px;
+  height: 100vh;
+  margin-top: 150px;
 `;
 const Srcon = styled.div``;
 
 const Input = styled.input`
   all: unset;
   width: 100%;
-  border: 1px solid #555;
+  border: 1px solid #eeeeee;
   padding: 20px;
   box-sizing: border-box;
+  border-radius: 25px;
   font-size: 20px;
+  color: ${mainStyle.mainColor};
   font &::placeholder {
     font-size: 20px;
   }
@@ -83,7 +82,7 @@ export const Search = () => {
     }
   };
   return (
-    <Wrap>
+    <div>
       <Container>
         <SearchWrap>
           <Srcon>
@@ -98,7 +97,6 @@ export const Search = () => {
                 type="text"
                 placeholder="영화 검색...."
               />
-
               {errors?.search?.message}
               {errors?.results?.message}
             </form>
@@ -128,6 +126,6 @@ export const Search = () => {
           </>
         )}
       </Container>
-    </Wrap>
+    </div>
   );
 };

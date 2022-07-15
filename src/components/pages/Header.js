@@ -8,16 +8,19 @@ import {
   faHouse,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+// import { useState } from "react";
 
 const SHeader = styled.div`
   width: 100%;
+  max-width: 100%;
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #393e46;
   position: fixed;
+  top: 0;
+  left: 0;
   padding: ${mainStyle.padding};
   z-index: 9;
 `;
@@ -48,21 +51,21 @@ const Menu = styled.div`
 `;
 
 export const Header = () => {
-  const [bg, setBg] = useState("transparent");
+  // const [bg, setBg] = useState("transparent");
 
-  const handleScroll = () => {
-    const sct = window.pageYOffset;
-    if (sct > 500) {
-      setBg("#1d1d1d");
-    } else {
-      setBg("transparent");
-    }
-  };
+  // const handleScroll = () => {
+  //   const sct = window.pageYOffset;
+  //   if (sct > 500) {
+  //     setBg("#1d1d1d");
+  //   } else {
+  //     setBg("transparent");
+  //   }
+  // };
 
-  window.addEventListener("scroll", handleScroll);
+  // window.addEventListener("scroll", handleScroll);
 
   return (
-    <SHeader bgcolor={bg}>
+    <SHeader>
       <Logo>
         <Link to={"/"}>
           <p>M-movie</p>

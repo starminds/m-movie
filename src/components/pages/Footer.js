@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { mainStyle } from "../styles/globalStyle";
 
 const SFooter = styled.div`
-  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #393e46;
   padding: ${mainStyle.padding};
+  margin-top: 150px;
 `;
 
 const Logo = styled.div`
